@@ -18,12 +18,16 @@ OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 all : $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
+	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(FLAGS) -I $(INC_DIR) -o $@ -c $<
 
-$(NAME) : $(OBJ)
+$(NAME) : obj $(OBJ)
 	@echo ".o files updated!..."
 	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "$(NAME) executable compiled!"
+
+obj:	
+	@mkdir -p $(OBJ_DIR)
 
 clean :
 	rm -rf $(OBJ_DIR)*.o
